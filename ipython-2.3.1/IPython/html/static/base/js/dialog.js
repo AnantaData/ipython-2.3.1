@@ -46,6 +46,9 @@ IPython.dialog = (function (IPython) {
             if (btn_opts.class) {
                 button.addClass(btn_opts.class);
             }
+            if (btn_opts.id) {
+                button.attr('id',btn_opts.id);
+            }
             footer.append(button);
         }
         dialog.append(footer);

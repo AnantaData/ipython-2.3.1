@@ -274,7 +274,6 @@ var IPython = (function (IPython) {
             this.kernel.clear_callbacks_for_msg(this.last_msg_id);
         }
         var callbacks = this.get_callbacks();
-        
         var old_msg_id = this.last_msg_id;
         this.last_msg_id = this.kernel.execute(this.get_text(), callbacks, {silent: false, store_history: true});
         if (old_msg_id) {
@@ -401,7 +400,7 @@ var IPython = (function (IPython) {
         } else {
             ns = encodeURIComponent(prompt_value);
         }
-        return 'In&nbsp;[' + ns + ']:';
+        return 'Profile&nbsp;' + ns + ':';
     };
 
     CodeCell.input_prompt_continuation = function (prompt_value, lines_number) {

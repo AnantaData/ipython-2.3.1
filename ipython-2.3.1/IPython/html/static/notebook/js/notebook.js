@@ -61,6 +61,7 @@ var IPython = (function (IPython) {
         this.save_notebook = function() { // don't allow save until notebook_loaded
             this.save_notebook_error(null, null, "Load failed, save is disabled");
         };
+
     };
 
     /**
@@ -80,7 +81,7 @@ var IPython = (function (IPython) {
     Notebook.prototype.create_elements = function () {
         var that = this;
         this.element.attr('tabindex','-1');
-        this.container = $("<div/>").addClass("container").attr("id", "notebook-container");
+        this.container = $("<div/>").addClass("container-cellarea").attr("id", "notebook-container");
         // We add this end_space div to the end of the notebook div to:
         // i) provide a margin between the last cell and the end of the notebook
         // ii) to prevent the div from scrolling up when the last cell is being
@@ -741,7 +742,7 @@ var IPython = (function (IPython) {
      *
      * @return cell {cell|null} created cell or null
      **/
-    Notebook.prototype.insert_cell_at_index = function(type, index){
+    Notebook.prototype.insert_cell_at_index = function(type,gui_type, index){
 
         var ncells = this.ncells();
         index = Math.min(index,ncells);
@@ -751,6 +752,23 @@ var IPython = (function (IPython) {
         if (ncells === 0 || this.is_valid_cell_index(index) || index === ncells) {
             if (type === 'code') {
                 cell = new IPython.CodeCell(this.kernel);
+                if(gui_type === 'flp'){
+                    cell = new IPython.FLProfile(this.kernel);
+                }
+                if(gui_type === 'dcp'){
+                    cell = new IPython.DCProfile(this.kernel);
+                }
+                if(gui_type === 'drp'){
+                    cell = new IPython.DRProfile(this.kernel);
+                }
+                if(gui_type === 'dtp'){
+                    cell = new IPython.DTProfile(this.kernel);
+                }
+                if(gui_type === 'ump'){
+                    cell = new IPython.UMProfile(this.kernel);
+                }if(gui_type === 'smp'){
+                    cell = new IPython.SMProfile(this.kernel);
+                }
                 cell.set_input_prompt();
             } else if (type === 'markdown') {
                 cell = new IPython.MarkdownCell();
@@ -844,7 +862,47 @@ var IPython = (function (IPython) {
      **/
     Notebook.prototype.insert_cell_below = function (type, index) {
         index = this.index_or_selected(index);
-        return this.insert_cell_at_index(type, index+1);
+        return this.insert_cell_at_index(type,'', index+1);
+    };
+
+
+    Notebook.prototype.insert_profile = function (type,profile_type, index) {
+        index = this.index_or_selected(index);
+        index +=1;
+        var ncells = this.ncells();
+        index = Math.min(index,ncells);
+        index = Math.max(index,0);
+        var cell = null;
+
+        if(profile_type === 'flp') {
+            cell = new IPython.FLProfile(this.kernel);
+        }else if(profile_type === 'dcp') {
+            cell = new IPython.DCProfile(this.kernel);
+        }else if(profile_type === 'dtp') {
+            cell = new IPython.DTProfile(this.kernel);
+        }else if(profile_type === 'drp') {
+            cell = new IPython.DRProfile(this.kernel);
+        }else if(profile_type === 'ump') {
+            cell = new IPython.UMProfile(this.kernel);
+        }else if (profile_type === 'smp'){
+            cell = new IPython.SMProfile(this.kernel);
+        }
+        cell.set_input_prompt();
+
+        if (ncells === 0 || this.is_valid_cell_index(index) || index === ncells) {
+
+            if(this._insert_element_at_index(cell.element,index)) {
+                cell.render();
+                $([IPython.events]).trigger('create.Cell', {'cell': cell, 'index': index});
+                cell.refresh();
+                // We used to select the cell after we refresh it, but there
+                // are now cases were this method is called where select is
+                // not appropriate. The selection logic should be handled by the
+                // caller of the the top level insert_cell methods.
+                this.set_dirty(true);
+            }
+        }
+        return cell;
     };
 
 
@@ -861,6 +919,21 @@ var IPython = (function (IPython) {
         return this.insert_cell_below(type,len-1);
     };
 
+    Notebook.prototype.isProfile = function(cell){
+        if ((cell instanceof IPython.FLProfile) ||
+            (cell instanceof IPython.DCProfile) ||
+            (cell instanceof IPython.DRProfile) ||
+            (cell instanceof IPython.DTProfile) ||
+            (cell instanceof IPython.UMProfile) ||
+            (cell instanceof IPython.SMProfile) ||
+            (cell instanceof IPython.Profile)
+
+        ){
+            return true;
+        }
+        return false;
+    };
+
     /**
      * Turn a cell into a code cell.
      * 
@@ -872,6 +945,7 @@ var IPython = (function (IPython) {
         if (this.is_valid_cell_index(i)) {
             var source_element = this.get_cell_element(i);
             var source_cell = source_element.data("cell");
+            if(this.isProfile(source_cell)){return;};
             if (!(source_cell instanceof IPython.CodeCell)) {
                 var target_cell = this.insert_cell_below('code',i);
                 var text = source_cell.get_text();
@@ -900,6 +974,7 @@ var IPython = (function (IPython) {
         if (this.is_valid_cell_index(i)) {
             var source_element = this.get_cell_element(i);
             var source_cell = source_element.data("cell");
+            if(this.isProfile(source_cell)){return;};
             if (!(source_cell instanceof IPython.MarkdownCell)) {
                 var target_cell = this.insert_cell_below('markdown',i);
                 var text = source_cell.get_text();
@@ -933,6 +1008,7 @@ var IPython = (function (IPython) {
         if (this.is_valid_cell_index(i)) {
             var source_element = this.get_cell_element(i);
             var source_cell = source_element.data("cell");
+            if(this.isProfile(source_cell)){return;};
             var target_cell = null;
             if (!(source_cell instanceof IPython.RawCell)) {
                 target_cell = this.insert_cell_below('raw',i);
@@ -961,11 +1037,13 @@ var IPython = (function (IPython) {
      * @param {Number} [level] A heading level (e.g., 1 becomes &lt;h1&gt;)
      */
     Notebook.prototype.to_heading = function (index, level) {
+
         level = level || 1;
         var i = this.index_or_selected(index);
         if (this.is_valid_cell_index(i)) {
             var source_element = this.get_cell_element(i);
             var source_cell = source_element.data("cell");
+            if(this.isProfile(source_cell)){return;};
             var target_cell = null;
             if (source_cell instanceof IPython.HeadingCell) {
                 source_cell.set_level(level);
@@ -1417,6 +1495,23 @@ var IPython = (function (IPython) {
             var cell = this.get_cell(i);
             if (cell instanceof IPython.CodeCell) {
                 cell.set_kernel(this.session.kernel);
+                console.log('kernel set at default');
+            }
+            if (cell instanceof IPython.Profile) {
+                cell.set_kernel(this.session.kernel);
+                console.log('kernel set at profile case');
+            }
+            if ((cell instanceof IPython.FLProfile) ||
+                (cell instanceof IPython.DCProfile) ||
+                (cell instanceof IPython.DRProfile) ||
+                (cell instanceof IPython.DTProfile) ||
+                (cell instanceof IPython.UMProfile) ||
+                (cell instanceof IPython.SMProfile)
+
+            ) {
+                cell.set_kernel(this.session.kernel);
+                console.log('kernel set at profileinstance case');
+
             }
         }
     };
@@ -1519,6 +1614,64 @@ var IPython = (function (IPython) {
     };
 
     /**
+     * Execute or render cell outputs and select the next cell.
+     *
+     * @method execute_cell_and_select_below
+     */
+    Notebook.prototype.execute_flp_cell_and_select_below = function () {
+
+        var cell = this.get_selected_cell();
+        var cell_index = this.find_cell_index(cell);
+        cell.set_text('print "hacked running file loading profile" \nprint"its done" \nprint"test"');
+        cell.execute();
+
+        // If we are at the end always insert a new cell and return
+        if (cell_index === (this.ncells()-1)) {
+            this.command_mode();
+            this.insert_cell_below('code');
+            this.select(cell_index+1);
+            this.edit_mode();
+            this.scroll_to_bottom();
+            this.set_dirty(true);
+            return;
+        }
+
+        this.command_mode();
+        this.select(cell_index+1);
+        this.focus_cell();
+        this.set_dirty(true);
+    };
+
+    /**
+     * Execute or render cell outputs and select the next cell.
+     *
+     * @method execute_cell_and_select_below
+     */
+    Notebook.prototype.execute_dcp_cell_and_select_below = function () {
+
+        var cell = this.get_selected_cell();
+        var cell_index = this.find_cell_index(cell);
+        cell.set_text('print "hacked running file loading profile"');
+        cell.execute();
+
+        // If we are at the end always insert a new cell and return
+        if (cell_index === (this.ncells()-1)) {
+            this.command_mode();
+            this.insert_cell_below('code');
+            this.select(cell_index+1);
+            this.edit_mode();
+            this.scroll_to_bottom();
+            this.set_dirty(true);
+            return;
+        }
+
+        this.command_mode();
+        this.select(cell_index+1);
+        this.focus_cell();
+        this.set_dirty(true);
+    };
+
+    /**
      * Execute all cells below the selected cell.
      * 
      * @method execute_cells_below
@@ -1535,6 +1688,15 @@ var IPython = (function (IPython) {
      */
     Notebook.prototype.execute_cells_above = function () {
         this.execute_cell_range(0, this.get_selected_index());
+    };
+
+    /**
+     * Execute all cells above the selected cell and the selected cell.
+     *
+     * @method execute_cells_above and me
+     */
+    Notebook.prototype.execute_cells_above_and_me = function () {
+        this.execute_cell_range(0, this.get_selected_index()+1);
     };
 
     /**
@@ -1639,7 +1801,7 @@ var IPython = (function (IPython) {
                     cell_data.cell_type = 'raw';
                 }
 
-                new_cell = this.insert_cell_at_index(cell_data.cell_type, i);
+                new_cell = this.insert_cell_at_index(cell_data.cell_type,cell_data.gui_type, i);
                 new_cell.fromJSON(cell_data);
                 if (new_cell.cell_type == 'code' && !new_cell.output_area.trusted) {
                     trusted = false;
@@ -2050,7 +2212,8 @@ var IPython = (function (IPython) {
     Notebook.prototype.load_notebook_success = function (data, status, xhr) {
         this.fromJSON(data);
         if (this.ncells() === 0) {
-            this.insert_cell_below('code');
+            //this.insert_cell_below('code');
+            this.insert_profile('code','flp',0);
             this.edit_mode(0);
         } else {
             this.select(0);
@@ -2409,6 +2572,18 @@ var IPython = (function (IPython) {
         $([IPython.events]).trigger('checkpoint_delete_failed.Notebook', [xhr, status, error]);
     };
 
+    /*Notebook.prototype.hide_stat_table = function ()
+    {
+        var stat_area_header = $("stat_area_header");
+        stat_area_header.onclick(function (e) {
+            var stat_table = $("stat_table");
+            if (stat_table.is_visible()) {
+                stat_table.hide();
+            } else {
+                stat_table.show();
+            }
+        });
+    }*/
 
     IPython.Notebook = Notebook;
 

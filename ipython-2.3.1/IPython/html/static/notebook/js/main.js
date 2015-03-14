@@ -57,6 +57,8 @@ function (marked) {
     IPython.layout_manager = new IPython.LayoutManager();
     IPython.pager = new IPython.Pager('div#pager', 'div#pager_splitter');
     IPython.quick_help = new IPython.QuickHelp();
+
+
     try {
         IPython.tour = new IPython.NotebookTour();
     } catch (e) {
@@ -104,6 +106,7 @@ function (marked) {
     $([IPython.events]).trigger('app_initialized.NotebookApp');
     IPython.notebook.load_notebook(opts.notebook_name, opts.notebook_path);
 
+    $("#tabs" ).tabs();
     if (marked) {
         marked.setOptions({
             gfm : true,
@@ -124,4 +127,5 @@ function (marked) {
             }
         });
     }
+
 });

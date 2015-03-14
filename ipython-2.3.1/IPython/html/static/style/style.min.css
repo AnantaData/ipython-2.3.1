@@ -21,7 +21,7 @@ label,select,button,input[type="button"],input[type="reset"],input[type="submit"
 input[type="search"]{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;-webkit-appearance:textfield}
 input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none}
 textarea{overflow:auto;vertical-align:top}
-@media print{*{text-shadow:none !important;color:#000 !important;background:transparent !important;box-shadow:none !important} a,a:visited{text-decoration:underline} a[href]:after{content:" (" attr(href) ")"} abbr[title]:after{content:" (" attr(title) ")"} .ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""} pre,blockquote{border:1px solid #999;page-break-inside:avoid} thead{display:table-header-group} tr,img{page-break-inside:avoid} img{max-width:100% !important} @page {margin:.5cm}p,h2,h3{orphans:3;widows:3} h2,h3{page-break-after:avoid}}body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#000;background-color:#fff}
+@media print{*{text-shadow:none !important;color:#000 !important;background:transparent !important;box-shadow:none !important} a,a:visited{text-decoration:underline} a[href]:after{content:" (" attr(href) ")"} abbr[title]:after{content:" (" attr(title) ")"} .ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""} pre,blockquote{border:1px solid #999;page-break-inside:avoid} thead{display:table-header-group} tr,img{page-break-inside:avoid} img{max-width:100% !important} @page {margin:.5cm}p,h2,h3{orphans:3;widows:3} h2,h3{page-break-after:avoid}}body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;line-height:50px;color:#000;background-color:#fff}
 a{color:#08c;text-decoration:none}
 a:hover,a:focus{color:#005580;text-decoration:underline}
 .img-rounded{border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px}
@@ -126,7 +126,7 @@ h1,h2,h3{line-height:40px}
 h1{font-size:35.75px}
 h2{font-size:29.25px}
 h3{font-size:22.75px}
-h4{font-size:16.25px}
+h4{font-size:16.25px;color: #7843AE;}
 h5{font-size:13px}
 h6{font-size:11.049999999999999px}
 h1 small{font-size:22.75px}
@@ -672,7 +672,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini{*padding-top:1px;*padding-
 .navbar-fixed-top{top:0}
 .navbar-fixed-top .navbar-inner,.navbar-static-top .navbar-inner{-webkit-box-shadow:0 1px 10px rgba(0,0,0,.1);-moz-box-shadow:0 1px 10px rgba(0,0,0,.1);box-shadow:0 1px 10px rgba(0,0,0,.1)}
 .navbar-fixed-bottom{bottom:0}.navbar-fixed-bottom .navbar-inner{-webkit-box-shadow:0 -1px 10px rgba(0,0,0,.1);-moz-box-shadow:0 -1px 10px rgba(0,0,0,.1);box-shadow:0 -1px 10px rgba(0,0,0,.1)}
-.navbar .nav{position:relative;left:0;display:block;float:left;margin:0 10px 0 0}
+.navbar .nav{position:relative;left:0;display:block;float:left;margin:0 -5px 0 0}
 .navbar .nav.pull-right{float:right;margin-right:0}
 .navbar .nav>li{float:left}
 .navbar .nav>li>a{float:none;padding:8px 15px 8px;color:#777;text-decoration:none;text-shadow:0 1px 0 #fff}
@@ -930,7 +930,7 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 .icon-road:before{content:"\f018"}
 .icon-download-alt:before{content:"\f019"}
 .icon-download:before{content:"\f01a"}
-.icon-upload:before{content:"\f01b"}
+.icon-upload:before{content:"\f093"}
 .icon-inbox:before{content:"\f01c"}
 .icon-play-circle:before{content:"\f01d"}
 .icon-rotate-right:before,.icon-repeat:before{content:"\f01e"}
@@ -1070,6 +1070,7 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 .icon-wrench:before{content:"\f0ad"}
 .icon-tasks:before{content:"\f0ae"}
 .icon-filter:before{content:"\f0b0"}
+.icon-linechart:before{content:"\f080"}
 .icon-briefcase:before{content:"\f0b1"}
 .icon-fullscreen:before{content:"\f0b2"}
 .icon-group:before{content:"\f0c0"}
@@ -1220,6 +1221,7 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 .icon-won:before,.icon-krw:before{content:"\f159"}
 .icon-bitcoin:before,.icon-btc:before{content:"\f15a"}
 .icon-file:before{content:"\f15b"}
+.icon-filter:before{content: "\f0b0"}
 .icon-file-text:before{content:"\f15c"}
 .icon-sort-by-alphabet:before{content:"\f15d"}
 .icon-sort-by-alphabet-alt:before{content:"\f15e"}
@@ -1292,9 +1294,9 @@ div.error>p{font-size:200%;line-height:normal}
 div.traceback-wrapper{text-align:left;max-width:800px;margin:auto}
 body{background-color:#fff;position:absolute;left:0;right:0;top:0;bottom:0;overflow:visible}
 div#header{display:none}
-#ipython_notebook{padding-left:16px}
+#ipython_notebook{padding-left:0px}
 #noscript{width:auto;padding-top:16px;padding-bottom:16px;text-align:center;font-size:22px;color:#f00;font-weight:bold}
-#ipython_notebook img{font-family:Verdana,"Helvetica Neue",Arial,Helvetica,Geneva,sans-serif;height:24px;text-decoration:none;color:#000}
+#ipython_notebook img{font-family:Verdana,"Helvetica Neue",Arial,Helvetica,Geneva,sans-serif;height:60px;text-decoration:none;color:#000}
 #site{width:100%;display:none}
 .ui-button .ui-button-text{padding:.2em .8em;font-size:77%}
 input.ui-button{padding:.3em .9em}
@@ -1352,12 +1354,12 @@ input.engine_num_input{width:60px}
 div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
 div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
 div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
-div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+div.prompt{min-width:4ex;padding:.7em;margin:0;font-family:monospace;text-align:left;line-height:1.21429em}
 @media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
 div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
 div.prompt:empty{padding-top:0;padding-bottom:0}
 div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}
-@media (max-width:480px){div.input{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.input_prompt{color:#000080;border-top:1px solid transparent}
+@media (max-width:480px){div.input{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}}div.input_prompt{width:10%; color:#7843AE;font-family:Verdana, Arial, sans-serif;border-top:1px solid transparent; width:10%}
 div.input_area>div.highlight{margin:.4em;border:none;padding:0;background-color:transparent}
 div.input_area>div.highlight>pre{margin:0;border:none;padding:0;background-color:transparent}
 .CodeMirror{line-height:1.21429em;height:auto;background:none;}
@@ -1522,10 +1524,10 @@ div#pager{font-size:14px;line-height:20px;overflow:auto;display:none}div#pager p
 .quickhelp{display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;display:flex;flex-direction:row;align-items:stretch}
 .shortcut_key{display:inline-block;width:20ex;text-align:right;font-family:monospace}
 .shortcut_descr{display:inline-block;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
-span#save_widget{padding:0 5px;margin-top:12px}
+span#save_widget{padding:0 5px;margin-top:30px}
 span#checkpoint_status,span#autosave_status{font-size:small}
-@media (max-width:767px){span#save_widget{font-size:small} span#checkpoint_status,span#autosave_status{font-size:x-small}}@media (max-width:767px){span#checkpoint_status,span#autosave_status{display:none}}@media (min-width:768px) and (max-width:979px){span#checkpoint_status{display:none} span#autosave_status{font-size:x-small}}.toolbar{padding:0 10px;margin-top:-5px}.toolbar select,.toolbar label{width:auto;height:26px;vertical-align:middle;margin-right:2px;margin-bottom:0;display:inline;font-size:92%;margin-left:.3em;margin-right:.3em;padding:0;padding-top:3px}
-.toolbar .btn{padding:2px 8px}
+@media (max-width:767px){span#save_widget{font-size:small} span#checkpoint_status,span#autosave_status{font-size:x-small}}@media (max-width:767px){span#checkpoint_status,span#autosave_status{display:none}}@media (min-width:768px) and (max-width:979px){span#checkpoint_status{display:none} span#autosave_status{font-size:x-small}}.toolbar{padding:0 10px;margin-top:0px}.toolbar select,.toolbar label{width:auto;height:26px;vertical-align:middle;margin-right:2px;margin-bottom:0;display:inline;font-size:92%;margin-left:.3em;margin-right:.3em;padding:0;padding-top:3px}
+.toolbar .btn{border-radius:8px;font-family:Arial;color:#000000;background:#CACACA;padding:2px 8px}
 .toolbar .btn-group{margin-top:0}
 .toolbar-inner{border:none !important;-webkit-box-shadow:none !important;-moz-box-shadow:none !important;box-shadow:none !important}
 #maintoolbar{margin-bottom:0}
@@ -1537,3 +1539,395 @@ span#checkpoint_status,span#autosave_status{font-size:small}
 .ipython_tooltip .tooltiptext pre{border:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;font-size:100%;background-color:#f7f7f7}
 .pretooltiparrow{left:0;margin:0;top:-16px;width:40px;height:16px;overflow:hidden;position:absolute}
 .pretooltiparrow:before{background-color:#f7f7f7;border:1px #ababab solid;z-index:11;content:"";position:absolute;left:15px;top:10px;width:25px;height:25px;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg)}
+
+.sidebar {
+    float: left;
+    width: 20%;
+}
+
+.content-wrap {
+    float: left;
+    width: 45%;
+
+}
+
+#vis_stat_area {
+    float: right;
+    width: 50%;
+    margin-right: 1cm;
+    margin-top: 8px;
+}
+
+#statistics_area {
+    height:485px;
+    margin-top: 0.25cm;
+    overflow:auto;
+}
+#visualization-area {
+    height:485px;
+    overflow:auto;
+}
+
+#sidebuttons {
+    float: left;
+    width: 25%;
+}
+
+#visarea{
+    float: right;
+    width: 75%;
+}
+
+.clear {clear:both;}
+
+
+
+.container-notebook{width:550px;margin-left: 1cm;}
+
+.container-cellarea{width:480px;margin-left: 1cm}
+
+.container-leftarea{width:100px;margin-left: 1.5cm;margin-top: 1.5cm}
+
+.btn-sidebar{width: 100%}
+
+.profile-element{margin-left: 0.5cm; margin-right: 0.5cm;margin-top: 0.2cm;margin-bottom: 0.2cm}
+
+.body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*background-color: #586e75;*/
+}
+
+
+th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+
+
+
+/* Terence Ordona, portal[AT]imaputz[DOT]com         */
+/* http://creativecommons.org/licenses/by-sa/2.0/    */
+
+/* begin some basic styling here                     */
+/*body {
+    background: #FFF;
+    color: #000;
+    font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    margin: 10px;
+    padding: 0
+}
+*/
+table, td, a {
+    color: #000;
+    font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+/*
+h1 {
+    font: normal normal 18px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    margin: 0 0 5px 0
+}
+
+h2 {
+    font: normal normal 16px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    margin: 0 0 5px 0
+}
+
+h3 {
+    font: normal normal 13px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: #008000;
+    margin: 0 0 15px 0
+}*/
+/* end basic styling                                 */
+
+/* define height and width of scrollable area. Add 16px to width for scrollbar          */
+div.tableContainer {
+    clear: both;
+    border: 1px solid #963;
+    overflow: auto;
+    width: 756px
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+html>body div.tableContainer {
+    overflow: hidden;
+    width: 756px
+}
+
+/* define width of table. IE browsers only                 */
+div.tableContainer table {
+    float: left;
+    width: 740px
+}
+
+/* define width of table. Add 16px to width for scrollbar.           */
+/* All other non-IE browsers.                                        */
+html>body div.tableContainer table {
+    width: 756px
+}
+
+/* set table header to a fixed position. WinIE 6.x only                                       */
+/* In WinIE 6.x, any element with a position property set to relative and is a child of       */
+/* an element that has an overflow property set, the relative value translates into fixed.    */
+/* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
+thead.fixedHeader tr {
+    position: relative
+}
+
+/* set THEAD element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+html>body thead.fixedHeader tr {
+    display: block
+}
+
+/* make the TH elements pretty */
+thead.fixedHeader th {
+    background: #586e75;
+    border-left: 1px solid #EB8;
+    border-right: 1px solid #B74;
+    border-top: 1px solid #EB8;
+    font-weight: normal;
+    padding: 4px 3px;
+    text-align: left
+}
+
+/* make the A elements pretty. makes for nice clickable headers                */
+thead.fixedHeader a, thead.fixedHeader a:link, thead.fixedHeader a:visited {
+    color: #FFF;
+    display: block;
+    text-decoration: none;
+    width: 100%
+}
+
+/* make the A elements pretty. makes for nice clickable headers                */
+/* WARNING: swapping the background on hover may cause problems in WinIE 6.x   */
+thead.fixedHeader a:hover {
+    color: #FFF;
+    display: block;
+    text-decoration: underline;
+    width: 100%
+}
+
+/* define the table content to be scrollable                                              */
+/* set TBODY element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+/* induced side effect is that child TDs no longer accept width: auto                     */
+html>body tbody.scrollContent {
+    display: block;
+    height: 447px;
+    overflow: auto;
+    width: 100%
+}
+
+/* make TD elements pretty. Provide alternating classes for striping the table */
+/* http://www.alistapart.com/articles/zebratables/                             */
+tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
+    background: #FFF;
+    border-bottom: none;
+    border-left: none;
+    border-right: 1px solid #CCC;
+    border-top: 1px solid #DDD;
+    padding: 2px 3px 3px 4px
+}
+
+tbody.scrollContent tr.alternateRow td {
+    background: #EEE;
+    border-bottom: none;
+    border-left: none;
+    border-right: 1px solid #CCC;
+    border-top: 1px solid #DDD;
+    padding: 2px 3px 3px 4px
+}
+
+/* define width of TH elements: 1st, 2nd, and 3rd respectively.          */
+/* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+html>body thead.fixedHeader th {
+    width: 200px
+}
+
+html>body thead.fixedHeader th + th {
+    width: 240px
+}
+
+html>body thead.fixedHeader th + th + th {
+    width: 316px
+}
+
+/* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
+/* All other non-IE browsers.                                            */
+/* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
+html>body tbody.scrollContent td {
+    width: 200px
+}
+
+html>body tbody.scrollContent td + td {
+    width: 240px
+}
+
+html>body tbody.scrollContent td + td + td {
+    width: 300px
+}
+
+/*--------------------d3 styles----------------------*/
+.box {
+    font: 10px sans-serif;
+}
+
+.box line,
+.box rect,
+.box circle {
+    fill: orange;
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+
+.box .center {
+    stroke-dasharray: 3,3;
+}
+
+.box .outlier {
+    fill: none;
+    stroke: #ccc;
+}
+
+body {
+    font: 10px sans-serif;
+}
+
+.dot {
+    stroke: #000;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.hexagon {
+    fill: none;
+    stroke: #fff;
+    stroke-width: .5px;
+}
+
+.bar {
+    fill: orange;
+}
+
+.bar:hover {
+    fill: orangered ;
+}
+
+.bar text {
+    fill: #fff;
+}
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+}
+
+svg{
+    border-style:solid;
+    border-width:2px;
+    border-color: #A9C9C9;
+
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+
+
+
+/*---------------------end d3 styles------------------*/
+
+
+
+
+.ui-widget-header {
+    background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) repeat-x !important;
+    color: #222222;
+    font-weight: bold;
+    height:27px
+}
+
+.ui-widget-header ul {
+    height:11px;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    height:25px;
+    font-size:10px;
+
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    position:relative;
+    top:0px
+}
+
+.stepinputui-left{
+    float: left;
+    width: 50%;
+}
+
+.stepinputui-right{
+    float: right;
+    width: 50%;
+}
+
+.stepinputui-select{
+    float: left;
+    width: 70%;
+}
+.stepinputui-button{
+    float: left;
+    width: 30%;
+    margin-top: 22px;
+}
+
+.modal-mini{
+    width : 560px;
+    left:55%;
+    top:20%
+}
+
+.modal_stretch-mini{
+    height: 60%;
+}
+.checkboxlist {
+    height:100%;
+    width:100%;
+    overflow-y:auto;
+    float:left;
+    position:relative;
+    margin-left:-5px;
+}

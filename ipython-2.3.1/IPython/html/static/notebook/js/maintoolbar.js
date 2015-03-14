@@ -16,7 +16,7 @@ var IPython = (function (IPython) {
         IPython.ToolBar.apply(this, arguments);
         this.construct();
         this.add_celltype_list();
-        this.add_celltoolbar_list();
+        //this.add_celltoolbar_list();
         this.bind_events();
     };
 
@@ -44,7 +44,77 @@ var IPython = (function (IPython) {
                         IPython.notebook.select_next();
                         IPython.notebook.focus_cell();
                         }
-                }
+                },
+                {
+                    id : 'insert_flp',
+                    label : 'Insert File Loading Profile',
+                    icon : 'icon-upload',
+                    callback : function () {
+                        IPython.notebook.insert_profile('code','flp');
+                        IPython.notebook.select_next();
+                        IPython.notebook.focus_cell();
+                    }
+                },
+                {
+                    id : 'insert_dcp',
+                    label : 'Insert Data Cleaning Profile',
+                    icon : 'icon-eraser',
+                    callback : function () {
+                        IPython.notebook.insert_profile('code','dcp');
+                        IPython.notebook.select_next();
+                        IPython.notebook.focus_cell();
+                    }
+                },
+                {
+                    id : 'insert_drp',
+                    label : 'Insert Data Reduction Profile',
+                    icon : 'icon-filter',
+                    callback : function () {
+                        IPython.notebook.insert_profile('code','drp');
+                        IPython.notebook.select_next();
+                        IPython.notebook.focus_cell();
+                    }
+                },
+                {
+                    id : 'insert_dtp',
+                    label : 'Insert Data Transformation Profile',
+                    icon : 'icon-sort-by-attributes',
+                    callback : function () {
+                        IPython.notebook.insert_profile('code','dtp');
+                        IPython.notebook.select_next();
+                        IPython.notebook.focus_cell();
+                    }
+                },
+                {
+                    id : 'insert_ump',
+                    label : 'Insert Unsupervised Mining Profile',
+                    icon : 'icon-fullscreen',
+                    callback : function () {
+                        IPython.notebook.insert_profile('code','ump');
+                        IPython.notebook.select_next();
+                        IPython.notebook.focus_cell();
+                    }
+                },{
+                    id : 'insert_smp',
+                    label : 'Insert Supervised Mining Profile',
+                    icon : 'icon-linechart',
+                    callback : function () {
+                        IPython.notebook.insert_profile('code','smp');
+                        IPython.notebook.select_next();
+                        IPython.notebook.focus_cell();
+                    }
+                },
+
+                //{
+                //    id : 'insert_dcp',
+                //    label : 'Insert Data Cleaning Profile',
+                //    icon : 'icon-plus-sign',
+                //    callback : function () {
+                //        IPython.notebook.insert_dcp('code');
+                //        IPython.notebook.select_next();
+                //        IPython.notebook.focus_cell();
+                //    }
+                //}
             ],'insert_above_below');
 
         this.add_buttons_group([
@@ -97,13 +167,32 @@ var IPython = (function (IPython) {
         this.add_buttons_group([
                 {
                     id : 'run_b',
-                    label : 'Run Cell',
+                    label : 'Run All Cells',
                     icon : 'icon-play',
                     callback : function () {
                         // emulate default shift-enter behavior
-                        IPython.notebook.execute_cell_and_select_below();
+                        //IPython.notebook.execute_cell_and_select_below();
+                        IPython.notebook.execute_all_cells();
+                    }
+                }/*,
+                {
+                    id : 'run_file_profile',
+                    label : 'Run File Load Profile',
+                    icon : 'icon-play',
+                    callback : function () {
+                        // emulate default shift-enter behavior
+                        IPython.notebook.execute_flp_cell_and_select_below();
                     }
                 },
+                {
+                    id : 'run_cleaning_profile',
+                    label : 'Run Data Cleaning Profile',
+                    icon : 'icon-play',
+                    callback : function () {
+                        // emulate default shift-enter behavior
+                        IPython.notebook.execute_dcp_cell_and_select_below();
+                    }
+                }*/,
                 {
                     id : 'interrupt_b',
                     label : 'Interrupt',
